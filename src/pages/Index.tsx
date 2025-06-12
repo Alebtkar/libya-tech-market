@@ -1,13 +1,28 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import Layout from '@/components/layout/Layout';
+import HeroCarousel from '@/components/home/HeroCarousel';
+import CategoryScroll from '@/components/home/CategoryScroll';
+import FeaturedProducts from '@/components/home/FeaturedProducts';
+import { motion } from 'framer-motion';
 
 const Index = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
+    <Layout>
+      <div className="space-y-8">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          <div className="container mx-auto px-4 py-6">
+            <HeroCarousel />
+          </div>
+        </motion.div>
+        
+        <CategoryScroll />
+        <FeaturedProducts />
       </div>
-    </div>
+    </Layout>
   );
 };
 
