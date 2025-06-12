@@ -29,13 +29,13 @@ const Products = () => {
       return true;
     })
     .filter(product => {
-      if (selectedCategory) {
+      if (selectedCategory && selectedCategory !== 'all') {
         return product.categories?.includes(selectedCategory);
       }
       return true;
     })
     .filter(product => {
-      if (priceRange) {
+      if (priceRange && priceRange !== 'all') {
         const price = product.variants[0]?.price || 0;
         switch (priceRange) {
           case 'under-500': return price < 500;
@@ -70,7 +70,7 @@ const Products = () => {
   const updateFilters = (newFilters: Record<string, string>) => {
     const params = new URLSearchParams(searchParams);
     Object.entries(newFilters).forEach(([key, value]) => {
-      if (value) {
+      if (value && value !== 'all') {
         params.set(key, value);
       } else {
         params.delete(key);
@@ -127,7 +127,7 @@ const Products = () => {
                 <SelectValue placeholder="اختر الفئة" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">جميع الفئات</SelectItem>
+                <SelectItem value="all">جميع الفئات</SelectItem>
                 {categories.map(category => (
                   <SelectItem key={category.id} value={category.id}>
                     {category.name}
@@ -145,7 +145,7 @@ const Products = () => {
                 <SelectValue placeholder="نطاق السعر" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">جميع الأسعار</SelectItem>
+                <SelectItem value="all">جميع الأسعار</SelectItem>
                 <SelectItem value="under-500">أقل من 500 د.ل</SelectItem>
                 <SelectItem value="500-1000">500 - 1000 د.ل</SelectItem>
                 <SelectItem value="1000-3000">1000 - 3000 د.ل</SelectItem>
@@ -162,7 +162,7 @@ const Products = () => {
                 <SelectValue placeholder="ترتيب حسب" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">بدون ترتيب</SelectItem>
+                <SelectItem value="default">بدون ترتيب</SelectItem>
                 <SelectItem value="price-low">السعر: من الأقل للأعلى</SelectItem>
                 <SelectItem value="price-high">السعر: من الأعلى للأقل</SelectItem>
                 <SelectItem value="name">الاسم</SelectItem>
